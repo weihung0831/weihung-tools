@@ -2,10 +2,10 @@
 
 Wei-Hung's developer toolkit for Claude Code — productivity skills for daily reports, README generation, and spec analysis. Supports both English and Traditional Chinese triggers.
 
-## Skills
+## Plugins
 
-| Skill | Trigger | Description |
-|-------|---------|-------------|
+| Plugin | Trigger | Description |
+|--------|---------|-------------|
 | `daily-report` | "daily report", "work summary", "today's progress" | Generate daily work progress reports from git history |
 | `readme-updater` | "update readme", "generate readme", "sync readme" | Auto-generate or update README.md from codebase analysis |
 | `spec-analyzer` | "analyze spec", "extract requirements", "spec breakdown" | Analyze spec documents, extract DO/DON'T lists and test cases |
@@ -18,10 +18,12 @@ Add the marketplace:
 /plugin marketplace add weihung0831/weihung-tools
 ```
 
-Install the plugin:
+Install individual plugins:
 
 ```
-/plugin install weihung-tools@weihung-tools
+/plugin install weihung-tools@daily-report
+/plugin install weihung-tools@readme-updater
+/plugin install weihung-tools@spec-analyzer
 ```
 
 ## Usage
@@ -39,18 +41,21 @@ Once installed, skills activate automatically when you use their trigger phrases
 ```
 weihung-tools/
 ├── .claude-plugin/
-│   └── plugin.json
-└── skills/
+│   └── marketplace.json
+└── plugins/
     ├── daily-report/
-    │   └── SKILL.md
+    │   ├── .claude-plugin/plugin.json
+    │   └── skills/daily-report/SKILL.md
     ├── readme-updater/
-    │   ├── SKILL.md
-    │   └── references/
-    │       └── section-templates.md
+    │   ├── .claude-plugin/plugin.json
+    │   └── skills/readme-updater/
+    │       ├── SKILL.md
+    │       └── references/section-templates.md
     └── spec-analyzer/
-        ├── SKILL.md
-        └── references/
-            └── output-template.md
+        ├── .claude-plugin/plugin.json
+        └── skills/spec-analyzer/
+            ├── SKILL.md
+            └── references/output-template.md
 ```
 
 ## License

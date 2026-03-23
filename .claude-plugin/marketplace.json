@@ -4,17 +4,32 @@
     "name": "weihung0831"
   },
   "metadata": {
-    "description": "Wei-Hung's developer toolkit — daily reports, README generation, and spec analysis skills"
+    "description": "Wei-Hung's developer toolkit — daily reports, README generation, and spec analysis skills",
+    "pluginRoot": "./plugins"
   },
   "plugins": [
     {
-      "name": "weihung-tools",
-      "description": "Developer productivity skills: daily-report, readme-updater, spec-analyzer",
+      "name": "daily-report",
+      "description": "Generate daily work progress reports from git history",
       "version": "1.0.0",
-      "source": "./",
-      "author": {
-        "name": "Wei-Hung"
-      },
+      "source": "./plugins/daily-report",
+      "author": { "name": "Wei-Hung" },
+      "license": "MIT"
+    },
+    {
+      "name": "readme-updater",
+      "description": "Auto-generate or update README.md from codebase analysis",
+      "version": "1.0.0",
+      "source": "./plugins/readme-updater",
+      "author": { "name": "Wei-Hung" },
+      "license": "MIT"
+    },
+    {
+      "name": "spec-analyzer",
+      "description": "Analyze spec documents, extract DO/DON'T lists and test cases",
+      "version": "1.0.0",
+      "source": "./plugins/spec-analyzer",
+      "author": { "name": "Wei-Hung" },
       "license": "MIT"
     }
   ]
