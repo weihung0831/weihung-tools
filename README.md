@@ -12,10 +12,16 @@ Wei-Hung's developer toolkit for Claude Code — productivity skills for daily r
 
 ## Installation
 
-In Claude Code, run:
+Add the marketplace:
 
 ```
-/install weihung0831/weihung-tools
+/plugin marketplace add weihung0831/weihung-tools
+```
+
+Install the plugin:
+
+```
+/plugin install weihung-tools@weihung-tools
 ```
 
 ## Usage
