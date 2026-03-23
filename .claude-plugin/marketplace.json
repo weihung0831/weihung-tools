@@ -1,0 +1,21 @@
+{
+  "name": "weihung-tools",
+  "owner": {
+    "name": "weihung0831"
+  },
+  "metadata": {
+    "description": "Wei-Hung's developer toolkit — daily reports, README generation, and spec analysis skills"
+  },
+  "plugins": [
+    {
+      "name": "weihung-tools",
+      "description": "Developer productivity skills: daily-report, readme-updater, spec-analyzer",
+      "version": "1.0.0",
+      "source": "./",
+      "author": {
+        "name": "Wei-Hung"
+      },
+      "license": "MIT"
+    }
+  ]
+}
