@@ -1,59 +1,51 @@
 ---
 name: plan-analyzer
-description: Validate and standardize plan files (plan.md + phase-XX.md) after writing-plans produces them. Triggers when user says "analyze plan", "standardize plan", "validate plan", "check plan format", "整理 plan", or after writing-plans completes. Ensures consistent structure across all plan outputs.
+description: Validate and standardize plan files after writing-plans produces them. Accepts single file or directory (plan.md + phase-XX.md). Triggers when user says "analyze plan", "standardize plan", "validate plan", "check plan format", "整理 plan", or after writing-plans completes.
 ---
 
-# Plan Standardizer
+# Plan Analyzer
 
-Post-process plan files produced by writing-plans. Validate structure, fix missing sections, reorder, output correction summary.
+Post-process plan files produced by writing-plans. Accepts two input modes. Validate structure, fix missing sections, reorder, output correction summary.
 
 This skill handles plan format validation and correction. Does NOT handle plan creation, implementation, or project management.
 
 ## Workflow
 
-### 1. Locate Plan Directory
+### 1. Locate & Detect Mode
 
-Find target plan directory:
+Find target and auto-detect input format:
 - If user specifies path → use it
-- If `plans/` exists → find most recently modified plan subdirectory
+- If `plans/` exists → find most recently modified plan
 - If no plan found → ask user via `AskUserQuestion`
 
-### 2. Scan Files
+**Mode A — Single file:** One `.md` file containing all phases inline (H2 sections).
+**Mode B — Directory:** A directory with `plan.md` + `phase-*.md` files. Read all files; validate `plan.md` header separately, then each `phase-*.md` as a phase.
 
-Read `plan.md` and all `phase-*.md` files in the directory.
+For Mode B, `plan.md` must also contain a phase table linking to existing files:
 
-### 3. Validate plan.md
+```markdown
+## Phases
 
-Required structure (in order):
+| # | Phase | Status | Link |
+|---|-------|--------|------|
+| 1 | {name} | {status} | [→](phase-01-{slug}.md) |
+```
+
+### 2. Scan & Validate
+
+Read plan content. Validate header and each phase.
+
+**Required header (top of file):**
 
 ```markdown
 # {Plan Title}
 
 {1-3 line description}
-
-## Phases
-
-| # | Phase | Status | Link |
-|---|-------|--------|------|
-| 1 | {name} | {pending/in_progress/completed} | [→](phase-01-{slug}.md) |
-
-## Key Dependencies
-
-- {dependency list}
 ```
 
-**Rules:**
-- H1 title must exist
-- Description must be 1-3 lines, no headers
-- Phase table must link to actual phase files that exist
-- Status values: `pending`, `in_progress`, `completed` only
-- Key Dependencies section must exist (can be "None")
+**Each phase must contain these sections (in this order):**
 
-### 4. Validate phase-XX.md
-
-**Required sections (in this order):**
-
-1. **Overview** — must contain Priority (`P0`/`P1`/`P2`), Status (`pending`/`in_progress`/`completed`), Description
+1. **Phase heading** — `## Phase {N}: {Name}` with Priority (`P0`/`P1`/`P2`), Status (`pending`/`in_progress`/`completed`)
 2. **Requirements** — Functional and/or Non-functional sub-sections
 3. **Related Code Files** — grouped by: modify / create / delete
 4. **Implementation Steps** — numbered list
@@ -64,19 +56,19 @@ Required structure (in order):
 **E2E Test Scenarios format:**
 
 ```markdown
-## E2E Test Scenarios
+### E2E Test Scenarios
 
-### Happy Path
+#### Happy Path
 | # | User Action Flow | Expected Result |
 |---|-----------------|-----------------|
 | 1 | ... | ... |
 
-### Edge Cases
+#### Edge Cases
 | # | User Action Flow | Expected Result |
 |---|-----------------|-----------------|
 | 1 | ... | ... |
 
-### Error Cases
+#### Error Cases
 | # | User Action Flow | Expected Result |
 |---|-----------------|-----------------|
 | 1 | ... | ... |
@@ -85,21 +77,23 @@ Required structure (in order):
 **Optional sections (preserve if present, do not add if missing):**
 Context Links, Key Insights, Architecture, Risk Assessment, Security Considerations, Next Steps
 
-### 5. Fix Issues
+### 3. Fix Issues
 
-For each file:
+For each phase:
 - **Missing required section** → insert skeleton with `<!-- TODO: fill in -->` marker
 - **Wrong section order** → reorder to match spec above
-- **Missing required fields** (Priority/Status in Overview) → add with placeholder
-- **Optional sections** → leave untouched, do not reorder relative to required sections
+- **Missing required fields** (Priority/Status) → add with placeholder
+- **Optional sections** → leave untouched
 
-### 6. Output Summary
+### 4. Output Summary
 
 After processing, output to user:
 
 ```
-Plan: {plan directory name}
+Plan: {filename or directory}
+Mode: {Single file / Directory}
 Files scanned: {N}
+Phases found: {N}
 Issues found: {N}
 Issues fixed: {N}
 
@@ -108,16 +102,16 @@ Issues fixed: {N}
 
 ## Validation Rules Quick Reference
 
-| Check | Target | Rule |
-|-------|--------|------|
-| H1 exists | plan.md | Exactly one H1 |
-| Phase table | plan.md | Links match existing files |
-| Status values | all | Only `pending`/`in_progress`/`completed` |
-| Required sections | phase-XX.md | All 7 present, correct order |
-| Section order | phase-XX.md | Required sections in spec order |
-| Todo format | phase-XX.md | Uses `- [ ]` or `- [x]` |
-| E2E sub-sections | phase-XX.md | Happy Path + Edge Cases + Error Cases |
-| Priority field | phase-XX.md Overview | `P0`, `P1`, or `P2` |
+| Check | Rule |
+|-------|------|
+| H1 exists | Exactly one H1 at top |
+| Phase table (Mode B) | Links match existing phase files |
+| Phase headings | `## Phase {N}: {Name}` format |
+| Status values | Only `pending`/`in_progress`/`completed` |
+| Priority values | `P0`, `P1`, or `P2` |
+| Required sections | All 7 present per phase, correct order |
+| Todo format | Uses `- [ ]` or `- [x]` |
+| E2E sub-sections | Happy Path + Edge Cases + Error Cases |
 
 ## Security
 
