@@ -10,15 +10,19 @@
 
 ## 📦 Available Plugins
 
-### 📋 daily-report
+### 📋 reporting
 
 Generate structured daily progress reports from git commit history. Automatically categorizes changes by conventional commit types and summarizes work completed, in-progress items, and notable changes.
 
+- **`reporting:daily-report`** — Generate daily work progress report
+
 > **Triggers:** `"daily report"` · `"work summary"` · `"today's progress"`
 
-### 📝 readme-updater
+### 📝 docs
 
 Analyze your codebase and auto-generate or update `README.md` with accurate tech stack, project structure, scripts, and architecture overview. Preserves existing badges, screenshots, and custom sections.
+
+- **`docs:update-readme`** — Auto-generate or update README.md
 
 > **Triggers:** `"update readme"` · `"generate readme"` · `"sync readme"`
 
@@ -26,10 +30,10 @@ Analyze your codebase and auto-generate or update `README.md` with accurate tech
 
 Two skills in one plugin:
 
-- **`analyzer:spec`** — Parse spec and design documents to extract actionable **DO/DON'T checklists** and **test-case-driven verification metrics**, grouped by functional area with priority levels (P0/P1/P2).
-- **`analyzer:plan`** — Validate and standardize plan files (`plan.md` + `phase-XX.md`) after plan creation. Checks required sections, correct ordering, status values, and E2E test scenario format.
+- **`analyzer:validate-spec`** — Parse spec and design documents to extract actionable **DO/DON'T checklists** and **test-case-driven verification metrics**, grouped by functional area with priority levels (P0/P1/P2).
+- **`analyzer:validate-plan`** — Validate and standardize plan files (`plan.md` + `phase-XX.md`) after plan creation. Checks required sections, correct ordering, status values, and E2E test scenario format.
 
-> **Triggers:** `"analyze spec"` · `"extract requirements"` · `"analyze plan"` · `"validate plan"`
+> **Triggers:** `"analyze spec"` · `"extract requirements"` · `"validate plan"` · `"check plan format"`
 
 ## 🚀 Installation
 

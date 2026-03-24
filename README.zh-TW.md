@@ -10,15 +10,19 @@
 
 ## 📦 可用插件
 
-### 📋 daily-report
+### 📋 reporting
 
 從 git commit 歷史產生結構化的每日進度回報。自動依 conventional commit 類型分類變更，摘要已完成、進行中項目與注意事項。
 
+- **`reporting:daily-report`** — 產生每日工作進度報告
+
 > **觸發詞：** `「今日進度」` · `「每日回報」` · `「daily report」` · `「工作摘要」`
 
-### 📝 readme-updater
+### 📝 docs
 
 分析程式碼庫，自動產生或更新 `README.md`，包含準確的技術棧、專案結構、指令與架構概覽。保留現有的徽章、截圖與自訂區塊。
+
+- **`docs:update-readme`** — 自動產生或更新 README.md
 
 > **觸發詞：** `「更新 readme」` · `「產生 readme」` · `「sync readme」`
 
@@ -26,10 +30,10 @@
 
 單一插件包含兩個技能：
 
-- **`analyzer:spec`** — 解析 spec 與設計文件，萃取可執行的 **DO/DON'T 清單**與**測試案例導向的驗證指標**，依功能區域分組並標注優先級（P0/P1/P2）。
-- **`analyzer:plan`** — 驗證並標準化計畫檔案（`plan.md` + `phase-XX.md`）。檢查必要區段、正確排序、狀態值與 E2E 測試情境格式。
+- **`analyzer:validate-spec`** — 解析 spec 與設計文件，萃取可執行的 **DO/DON'T 清單**與**測試案例導向的驗證指標**，依功能區域分組並標注優先級（P0/P1/P2）。
+- **`analyzer:validate-plan`** — 驗證並標準化計畫檔案（`plan.md` + `phase-XX.md`）。檢查必要區段、正確排序、狀態值與 E2E 測試情境格式。
 
-> **觸發詞：** `「分析 spec」` · `「萃取需求」` · `「分析 plan」` · `「驗證計畫」`
+> **觸發詞：** `「分析 spec」` · `「萃取需求」` · `「驗證計畫」` · `「check plan format」`
 
 ## 🚀 安裝方式
 
