@@ -1,7 +1,7 @@
 {
   "name": "analyzer",
-  "version": "2.0.0",
-  "description": "Analyze specs and validate plans",
+  "version": "3.0.0",
+  "description": "Analyze specs, validate plans, measure coverage, and archive documents",
   "author": {
     "name": "Wei-Hung"
   }
