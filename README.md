@@ -28,14 +28,15 @@ Analyze your codebase and auto-generate or update `README.md` with accurate tech
 
 ### 🔍 analyzer
 
-Four skills in one plugin:
+Five skills in one plugin:
 
 - **`analyzer:validate-spec`** — Parse spec and design documents to extract actionable **DO/DON'T checklists** and **test-case-driven verification metrics**, grouped by functional area with priority levels (P0/P1/P2).
 - **`analyzer:validate-plan`** — Validate and standardize plan files (`plan.md` + `phase-XX.md`) after plan creation. Checks required sections, correct ordering, status values, and E2E test scenario format.
 - **`analyzer:plan-coverage`** — Analyze plan implementation coverage with 4 metrics: **phase completion**, **todo progress**, **file existence**, and **success criteria** quality. Outputs a weighted coverage report.
+- **`analyzer:update-plan-status`** — Sync plan todo checkboxes and phase statuses with actual implementation evidence. Checks file existence, git history, and file content to mark completed todos and update phase statuses automatically.
 - **`analyzer:archive-triage`** — Scan `plans/` and `docs/` directories, classify documents as **archive-ready** or **active** based on completion status, age, and references, then move confirmed items to `archive/` subdirectories.
 
-> **Triggers:** `"analyze spec"` · `"extract requirements"` · `"validate plan"` · `"check plan format"` · `"plan coverage"` · `"覆蓋率"` · `"archive triage"` · `"歸檔"`
+> **Triggers:** `"analyze spec"` · `"extract requirements"` · `"validate plan"` · `"check plan format"` · `"plan coverage"` · `"覆蓋率"` · `"update plan status"` · `"sync plan"` · `"archive triage"` · `"歸檔"`
 
 ## 🚀 Installation
 
